@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learning Together | Inclusive Human-AI Teams for Collective Decision-Making</title>
+  <meta name="description"
+    content="Learning Together: Designing Inclusive Human-AI Teams for Collective Decision-Making." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="assets/js/tailwind-config.js"></script>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/include.js" defer></script>
+  <script src="assets/js/roadmap.js" defer></script>
+  <script src="assets/js/team.js" defer></script>
+  <script src="assets/js/partners.js" defer></script>
+</head>
+
+<body class="flex min-h-screen flex-col bg-white font-sans text-slate-800 antialiased">
+  <div id="site-header"></div>
+
+  <!-- Each section of the home page has its own file in /sections. They are loaded in this order. -->
+  <main class="flex-1">
+    <div data-include="sections/hero.html"></div>
+    <div data-include="sections/about-project.html"></div>
+    <div data-include="sections/research.html"></div>
+    <div data-include="sections/roadmap.html"></div>
+    <div data-include="sections/team.html"></div>
+    <div data-include="sections/partners.html"></div>
+  </main>
+
+  <div id="site-footer"></div>
+</body>
+
+</html>
