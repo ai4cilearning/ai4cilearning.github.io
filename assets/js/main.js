@@ -61,11 +61,10 @@ function renderFooter() {
   </footer>`;
 }
 
-// Highlight whichever section is in the middle of the screen.
 function initScrollSpy() {
   const links = [...document.querySelectorAll('header [data-nav]')];
   const sections = NAV_LINKS.map(({ id }) => document.getElementById(id)).filter(Boolean);
-  if (!sections.length || !('IntersectionObserver' in window)) return;
+  if (!sections.length) return;
 
   const setActive = (id) => {
     links.forEach((a) => {
@@ -78,11 +77,25 @@ function initScrollSpy() {
     });
   };
 
-  const observer = new IntersectionObserver(
-    (entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id)),
-    { rootMargin: '-45% 0px -50% 0px' } // a thin band across the middle of the viewport
-  );
-  sections.forEach((s) => observer.observe(s));
+  const update = () => {
+    const line = window.innerHeight / 3;
+    let current = null;
+    for (const s of sections) if (s.getBoundingClientRect().top <= line) current = s.id;
+    setActive(current);
+  };
+
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      update();
+      ticking = false;
+    });
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  update();
 }
 
 document.addEventListener('DOMContentLoaded', () => {

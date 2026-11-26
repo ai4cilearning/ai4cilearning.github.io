@@ -34,7 +34,7 @@
   }
 }
 
-/* Scroll smoothly when a nav link is clicked. Sections have scroll-mt-20 so the header doesn't cover their title. */
+/* Scroll smoothly when a nav link is clicked. Each section starts just under the sticky header; its own top padding (py-24) gives the space above the title. */
 html {
   scroll-behavior: smooth;
 }
