@@ -3,10 +3,10 @@
 const SITE_NAME = 'Learning Together';
 
 // Nav links. Each id matches a <section id="..."> on the home page.
+// The Roadmap section is still on the page, just not in the nav: it counts as part of Research.
 const NAV_LINKS = [
   { id: 'about-project', label: 'About' },
   { id: 'research-questions', label: 'Research' },
-  { id: 'roadmap', label: 'Roadmap' },
   { id: 'team', label: 'Team' },
   { id: 'partners', label: 'Partners' },
 ];
@@ -63,7 +63,9 @@ function renderFooter() {
 
 function initScrollSpy() {
   const links = [...document.querySelectorAll('header [data-nav]')];
-  const sections = NAV_LINKS.map(({ id }) => document.getElementById(id)).filter(Boolean);
+  const sections = [...document.querySelectorAll('section[id]')].filter((s) => s.id !== 'hero');
+  // Sections without their own nav link light up the link they belong under.
+  const PARENT = { roadmap: 'research-questions' };
   if (!sections.length) return;
 
   const setActive = (id) => {
@@ -80,7 +82,7 @@ function initScrollSpy() {
   const update = () => {
     const line = window.innerHeight / 3;
     let current = null;
-    for (const s of sections) if (s.getBoundingClientRect().top <= line) current = s.id;
+    for (const s of sections) if (s.getBoundingClientRect().top <= line) current = PARENT[s.id] || s.id;
     setActive(current);
   };
 
