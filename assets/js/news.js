@@ -1,14 +1,17 @@
-// The news, newest first. A title with an href links to the full story on another site, opening in a new tab.
-// Leave href out (or as '') for news with no link.
+// Oldest first; the page shows the newest at the top.
+//   href: links the whole title.
+//   links: links just some words in the title instead. Each text must match the title exactly.
 const NEWS = [
   {
-    title: 'Co-Design Inclusive Human-AI Collaboration: ASEF Workshop at the UNU Macau AI Conference on 26 November 2026',
-    href: 'https://unu.edu/macau/aiconf2026/program/workshop/asef-programme-workshop-human-ai-collaboration-who-should-ai-be-team-co-designing',
+    title: '1st Learning Together Co-Design Workshop, Who Should AI Be in the Team? Co-designing Inclusive Human–AI Collaboration, held as part of the first Asia-Europe Education Next Fellowship (ASEFNextEd1) Conference, co-located with the UNU Macau AI Conference 2026, Macau SAR, China, 26 November 2026.',
+    links: [
+      { text: 'Who Should AI Be in the Team? Co-designing Inclusive Human–AI Collaboration', href: 'https://unu.edu/macau/aiconf2026/program/workshop/asef-programme-workshop-human-ai-collaboration-who-should-ai-be-team-co-designing' },
+      { text: 'UNU Macau AI Conference 2026', href: 'https://unu.edu/macau/aiconf2026' },
+    ],
   },
   {
-    title: 'Co-Design Inclusive Human-AI Collaboration: ASEF Workshop at BNU (Zhuhai) on 28 November 2026',
-    // href: 'https://www.bnu.edu.cn/zhuhai/news/asef-workshop-human-ai-collaboration'
-  }
+    title: '2nd Learning Together Co-Design Workshop, Who Should AI Be in the Team? Co-designing Inclusive Human–AI Collaboration, co-located with the International Symposium on AI-Empowered Innovation and Development in Teacher Education, Zhuhai, China, 28 November 2026.',
+  },
 ];
 
 // Shown a few at a time, with page numbers underneath.
@@ -17,13 +20,19 @@ const NEWS_PER_PAGE = 5;
 
 const escNews = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 
-// Items without an href show as plain text. The &nbsp; keeps the arrow on the same line as the last word.
-const newsItemHtml = ({ title, href }) => {
+const inlineLink = 'underline decoration-slate-300 underline-offset-4 transition-colors hover:text-brand-700 hover:decoration-brand-700';
+
+const newsItemHtml = ({ title, href, links = [] }) => {
   const text = 'font-display text-lg font-semibold leading-snug tracking-tight text-slate-950 sm:text-xl';
-  if (!href) return `<li class="${text} cursor-pointer">${escNews(title)}</li>`;
-  return `<li>
+  // The &nbsp; keeps the arrow on the same line as the last word.
+  if (href) return `<li>
   <a href="${escNews(href)}" target="_blank" rel="noopener" class="group ${text} transition-colors hover:text-brand-700">${escNews(title)}&nbsp;<span class="text-slate-400 transition-colors group-hover:text-brand-700" aria-hidden="true">↗</span></a>
 </li>`;
+  let html = escNews(title);
+  for (const l of links) {
+    html = html.replace(escNews(l.text), `<a href="${escNews(l.href)}" target="_blank" rel="noopener" class="${inlineLink}">${escNews(l.text)}</a>`);
+  }
+  return `<li class="${text}">${html}</li>`;
 };
 
 function initNews() {
@@ -31,7 +40,10 @@ function initNews() {
   const nav = document.getElementById('news-pagination');
   if (!list || !nav) return;
 
-  list.innerHTML = NEWS.map(newsItemHtml).join('');
+  // Show the news items in reverse order (most recent first)
+  let html = '';
+  for (let i = NEWS.length - 1; i >= 0; i--) html += newsItemHtml(NEWS[i]);
+  list.innerHTML = html;
   const items = [...list.children];
   const pageCount = Math.ceil(items.length / NEWS_PER_PAGE);
 
