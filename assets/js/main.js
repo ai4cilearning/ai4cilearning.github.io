@@ -9,6 +9,7 @@ const NAV_LINKS = [
   { page: 'news.html', label: 'News' },
   { id: 'team', label: 'Team' },
   { id: 'partners', label: 'Partners' },
+  { id: 'contact', label: 'Contact' },
 ];
 
 // Work out where the site starts from this file's own location (two folders up),
