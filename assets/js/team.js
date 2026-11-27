@@ -15,9 +15,9 @@ const TEAM = [
   {
     title: 'Project Partners',
     people: [
-      { name: 'Professor Li Yuan', role: '', org: 'University of Cambridge', photo: P + 'Li_Yuan.png', website: '', linkedin: 'https://www.linkedin.com/in/li-yuan-39921661/' },
-      { name: 'Dr Imogen Casebourne', role: '', org: 'University of Cambridge', photo: P + 'Imogen_Casebourne.jpg', website: '', linkedin: 'https://uk.linkedin.com/in/imogen-c-6170111' },
       { name: 'Dr Luning Sun', role: '', org: 'University of Cambridge', photo: P + 'luning_sun.jpg', website: '', linkedin: 'https://www.linkedin.com/in/sunluning' },
+      { name: 'Dr Imogen Casebourne', role: '', org: 'University of Cambridge', photo: P + 'Imogen_Casebourne.jpg', website: '', linkedin: 'https://uk.linkedin.com/in/imogen-c-6170111' },
+      { name: 'Professor Li Yuan', role: '', org: 'University of Cambridge', photo: P + 'Li_Yuan.png', website: '', linkedin: 'https://www.linkedin.com/in/li-yuan-39921661/' },
       { name: 'Nora Petrova', role: '', org: 'Prolific', photo: P + 'Nora_Petrova.webp', website: '', linkedin: 'https://uk.linkedin.com/in/nora-petrova' },
       { name: 'Dr John Burden', role: '', org: 'Prolific', photo: P + 'John-Burden.jpg', website: 'https://johnburden.co.uk/', linkedin: 'https://uk.linkedin.com/in/john-burden-10966b358' },
       { name: 'Chengyu Huang', role: '', org: 'NetMind.AI', photo: P + 'Chengyu_Huang.jpeg', website: '', linkedin: 'https://www.linkedin.com/in/chengyu-huang-39373671' },
