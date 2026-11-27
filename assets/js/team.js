@@ -1,17 +1,20 @@
 // The team. Add, remove or reorder people here and the cards update to match.
-//   photo: path to their picture, e.g. 'assets/images/team/jane-doe.jpg'. Leave it as '' to show a grey placeholder.
+//   photo: path to their picture, e.g. P + 'Jane_Doe.jpg' (P is the assets/images/team/ folder). Leave it as '' to show a grey placeholder.
 //   website / linkedin: optional. Any you fill in appear as small icons when you hover over the card.
+const P = 'assets/images/team/';
 const TEAM = [
-  { name: 'Prof. Team Member', area: 'Research area', org: 'Institution (PI)', photo: '', website: '#', linkedin: '#' },
-  { name: 'Prof. Team Member', area: 'Research area', org: 'Institution', photo: '', website: '#', linkedin: '#' },
-  { name: 'Prof. Team Member', area: 'Research area', org: 'Institution', photo: '', website: '#', linkedin: '' },
-  { name: 'Prof. Team Member', area: 'Research area, second area', org: 'Institution', photo: '', website: '#', linkedin: '#' },
-  { name: 'Dr. Team Member', area: 'Research area', org: 'Institution', photo: '', website: '', linkedin: '#' },
-  { name: 'Dr. Team Member', area: 'Research area', org: 'Institution', photo: '', website: '#', linkedin: '#' },
-  { name: 'Dr. Team Member', area: 'Research area', org: 'Institution', photo: '', website: '#', linkedin: '' },
-  { name: 'Dr. Team Member', area: 'Research area', org: 'Institution', photo: '', website: '#', linkedin: '#' },
-  { name: 'Dr. Team Member', area: 'Research area', org: 'Institution', photo: '', website: '#', linkedin: '#' },
-  { name: 'Dr. Team Member', area: 'Research area', org: 'Institution', photo: '', website: '#', linkedin: '#' },
+  { name: 'Dr Zheng Yuan', role: 'Academic project lead', org: 'The University of Sheffield', photo: P + 'Zheng_Yuan.jpeg', website: 'https://www.cl.cam.ac.uk/~zy249/', linkedin: 'https://linkedin.com/in/zheng-yuan-a0979738' },
+  { name: 'Dr Bei Peng', role: 'Project co-lead', org: 'The University of Sheffield', photo: P + 'Bei_Peng.png', website: 'https://beipeng.github.io/', linkedin: 'https://uk.linkedin.com/in/bei-peng-5b08b992' },
+  { name: 'Supatat Chanwuttinant', role: 'Research Assistant', org: 'The University of Sheffield', photo: P + 'Supatat_Chanwuttinant.jpg', website: '', linkedin: 'https://www.linkedin.com/in/supatat-chanwuttinant/' },
+  { name: 'Haoming Sun', role: 'Research Assistant', org: 'The University of Sheffield', photo: P + 'Haoming_Sun.jpeg', website: '', linkedin: 'https://uk.linkedin.com/in/haoming-sun-bb6a182ab' },
+  { name: 'Kai Qian', role: 'Research Assistant', org: 'The University of Sheffield', photo: P + 'Kai_Qian.jpeg', website: '', linkedin: 'https://www.linkedin.com/in/kai-qian/' },
+  { name: 'Dr Imogen Casebourne', role: 'Academic project partner', org: 'University of Cambridge', photo: P + 'Imogen_Casebourne.jpg', website: '', linkedin: 'https://uk.linkedin.com/in/imogen-c-6170111' },
+  { name: 'Dr Luning Sun', role: 'Academic project partner', org: 'University of Cambridge', photo: P + 'luning_sun.jpg', website: '', linkedin: 'https://www.linkedin.com/in/sunluning' },
+  { name: 'Nora Petrova', role: 'Non-Academic team member', org: 'Prolific', photo: P + 'Nora_Petrova.webp', website: '', linkedin: 'https://uk.linkedin.com/in/nora-petrova' },
+  { name: 'Dr John Burden', role: 'Non-Academic team member', org: 'Prolific', photo: P + 'John-Burden.jpg', website: 'https://johnburden.co.uk/', linkedin: 'https://uk.linkedin.com/in/john-burden-10966b358' },
+  { name: 'Chengyu Huang', role: 'Non-Academic project partner lead', org: 'NetMind.AI', photo: P + 'Chengyu_Huang.jpeg', website: '', linkedin: 'https://www.linkedin.com/in/chengyu-huang-39373671' },
+  { name: 'Xiangpeng Wan', role: 'Non-Academic team member', org: 'NetMind.AI', photo: P + 'xiangpeng_wan.jpeg', website: '', linkedin: 'https://uk.linkedin.com/in/xiangpeng-wan-a26305107' },
+  { name: 'Hongyi Gu', role: 'Non-Academic team member', org: 'NetMind.AI', photo: '', website: '', linkedin: '' },
 ];
 
 const ICONS = {
@@ -23,7 +26,7 @@ const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&
 
 function photoHtml(m) {
   if (m.photo) {
-    return `<img src="${esc(m.photo)}" alt="${esc(m.name)}" loading="lazy" class="h-full w-full object-cover transition duration-500 group-hover:scale-[1.03]" />`;
+    return `<img src="${esc(m.photo)}" alt="${esc(m.name)}" loading="lazy" class="h-full w-full object-cover object-[center_25%] transition duration-500 group-hover:scale-[1.03]" />`;
   }
   // No photo yet, so show a plain outline of a person
   return `<div class="grid h-full w-full place-items-center bg-gradient-to-br from-slate-100 to-slate-200" role="img" aria-label="Photo placeholder">
@@ -31,28 +34,35 @@ function photoHtml(m) {
   </div>`;
 }
 
-function linkHtml(href, kind, label) {
+// onPhoto: the desktop icons that sit over the photo. Otherwise the small icons under the role on phones and tablets.
+function linkHtml(href, kind, label, onPhoto) {
   if (!href) return '';
+  const look = onPhoto
+    ? 'h-9 w-9 bg-white/90 text-slate-700 shadow-sm backdrop-blur hover:bg-white'
+    : 'h-8 w-8 bg-slate-100 text-slate-600 hover:bg-brand-50';
   return `<a href="${esc(href)}" target="_blank" rel="noopener" aria-label="${label}"
-    class="grid h-8 w-8 place-items-center rounded-lg sm:h-9 sm:w-9 bg-white/90 text-slate-700 shadow-sm backdrop-blur transition hover:bg-white hover:text-brand-700">${ICONS[kind]}</a>`;
+    class="grid place-items-center rounded-lg transition hover:text-brand-700 ${look}">${ICONS[kind]}</a>`;
 }
 
 function initTeam() {
   const grid = document.getElementById('team-grid');
   if (!grid) return;
   grid.innerHTML = TEAM.map((m) => {
-    const links = linkHtml(m.website, 'website', `${m.name}’s website`) + linkHtml(m.linkedin, 'linkedin', `${m.name} on LinkedIn`);
+    const links = (onPhoto) =>
+      linkHtml(m.website, 'website', `${m.name}’s website`, onPhoto) + linkHtml(m.linkedin, 'linkedin', `${m.name} on LinkedIn`, onPhoto);
+    const hasLinks = m.website || m.linkedin;
     return `
     <article class="group flex w-[calc((100%-1rem)/2)] flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white transition hover:-translate-y-1 hover:shadow-lg hover:shadow-slate-200/60
                     md:w-[calc((100%-3rem)/3)] lg:w-[calc((100%-4.5rem)/4)]">
       <div class="relative aspect-square overflow-hidden">
         ${photoHtml(m)}
-        ${links ? `<div class="absolute inset-x-0 bottom-3 flex justify-center gap-2 transition lg:translate-y-2 lg:opacity-0 lg:group-hover:translate-y-0 lg:group-hover:opacity-100 lg:group-focus-within:translate-y-0 lg:group-focus-within:opacity-100">${links}</div>` : ''}
+        ${hasLinks ? `<div class="absolute inset-x-0 bottom-3 hidden translate-y-2 justify-center gap-2 opacity-0 transition group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100 lg:flex">${links(true)}</div>` : ''}
       </div>
-      <div class="flex-1 p-4 sm:p-5">
+      <div class="flex flex-1 flex-col p-4 sm:p-5">
         <h3 class="font-display text-base font-semibold leading-snug sm:text-lg tracking-tight text-slate-950">${esc(m.name)}</h3>
-        <p class="mt-1.5 text-sm text-slate-500">${esc(m.area)}</p>
-        <p class="text-sm text-slate-400">${esc(m.org)}</p>
+        <p class="mt-1.5 text-[0.8125rem] sm:text-sm text-slate-500">${esc(m.org)}</p>
+        <p class="text-[0.8125rem] sm:text-sm text-slate-400">${esc(m.role)}</p>
+        ${hasLinks ? `<div class="mt-auto flex gap-2 pt-4 lg:hidden">${links(false)}</div>` : ''}
       </div>
     </article>`;
   }).join('');

@@ -2,13 +2,14 @@
 // and highlights the nav link for the section you're looking at.
 const SITE_NAME = 'Learning Together';
 
-// Nav links. Each id matches a <section id="..."> on the home page.
+// Nav links: id scrolls to a <section id="..."> on the home page, page opens a separate page.
 const NAV_LINKS = [
   { id: 'about-project', label: 'About' },
   { id: 'research-questions', label: 'Research' },
-  { id: 'roadmap', label: 'Roadmap' },
+  { page: 'news.html', label: 'News' },
   { id: 'team', label: 'Team' },
   { id: 'partners', label: 'Partners' },
+  { id: 'contact', label: 'Contact' },
 ];
 
 // Work out where the site starts from this file's own location (two folders up),
@@ -22,15 +23,19 @@ function isHomePage() {
 }
 
 // On the home page a link just scrolls down. On other pages it takes you back to the home page at that section.
-// Links use the site root (/) rather than /index.html, so the address bar stays clean.
 const sectionHref = (id) => (isHomePage() ? `#${id}` : siteUrl(`#${id}`));
+const navHref = ({ id, page }) => (page ? siteUrl(page) : sectionHref(id));
+
+const isCurrentPage = (page) => !!page && window.location.pathname.endsWith(`/${page}`);
 
 function renderHeader() {
-  const link = ({ id, label }, mobile = false) => {
+  const link = (l, mobile = false) => {
+    const current = isCurrentPage(l.page);
     const base = mobile
-      ? 'block rounded-md px-3 py-2 text-base text-slate-600 hover:bg-slate-50 hover:text-slate-950'
-      : 'relative px-3 py-2 text-[15px] text-slate-500 transition-colors hover:text-slate-950';
-    return `<a href="${sectionHref(id)}" data-nav="${id}" class="${base}">${label}</a>`;
+      ? `block rounded-md px-3 py-2 text-base hover:bg-slate-50 hover:text-slate-950 ${current ? 'font-medium text-slate-950' : 'text-slate-600'}`
+      : `relative px-3 py-2 text-[15px] transition-colors hover:text-slate-950 ${current ? 'font-medium text-slate-950' : 'text-slate-500'}`;
+    const attrs = l.page ? (current ? ' aria-current="page"' : '') : ` data-nav="${l.id}"`;
+    return `<a href="${navHref(l)}"${attrs} class="${base}">${l.label}</a>`;
   };
 
   return `
@@ -56,16 +61,17 @@ function renderFooter() {
   <footer class="mt-16 border-t border-slate-200 bg-white">
     <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-8 text-sm text-slate-500 sm:flex-row sm:px-6">
       <p>&copy; ${year} ${SITE_NAME}. All rights reserved.</p>
-      <div class="flex flex-wrap justify-center gap-x-4 gap-y-2">${NAV_LINKS.map(({ id, label }) => `<a href="${sectionHref(id)}" class="hover:text-slate-900">${label}</a>`).join('')}</div>
+      <div class="flex flex-wrap justify-center gap-x-4 gap-y-2">${NAV_LINKS.map((l) => `<a href="${navHref(l)}" class="hover:text-slate-900">${l.label}</a>`).join('')}</div>
     </div>
   </footer>`;
 }
 
-// Highlight whichever section is in the middle of the screen.
 function initScrollSpy() {
   const links = [...document.querySelectorAll('header [data-nav]')];
-  const sections = NAV_LINKS.map(({ id }) => document.getElementById(id)).filter(Boolean);
-  if (!sections.length || !('IntersectionObserver' in window)) return;
+  const sections = [...document.querySelectorAll('section[id]')].filter((s) => s.id !== 'hero');
+  // Sections without their own nav link light up the link they belong under.
+  const PARENT = { roadmap: 'research-questions' };
+  if (!sections.length) return;
 
   const setActive = (id) => {
     links.forEach((a) => {
@@ -78,11 +84,25 @@ function initScrollSpy() {
     });
   };
 
-  const observer = new IntersectionObserver(
-    (entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id)),
-    { rootMargin: '-45% 0px -50% 0px' } // a thin band across the middle of the viewport
-  );
-  sections.forEach((s) => observer.observe(s));
+  const update = () => {
+    const line = window.innerHeight / 3;
+    let current = null;
+    for (const s of sections) if (s.getBoundingClientRect().top <= line) current = PARENT[s.id] || s.id;
+    setActive(current);
+  };
+
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      update();
+      ticking = false;
+    });
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  update();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -98,7 +118,6 @@ document.addEventListener('DOMContentLoaded', () => {
     toggle.setAttribute('aria-expanded', String(open));
   };
   toggle?.addEventListener('click', () => setMenu(menu.classList.contains('hidden')));
-  // Close the mobile menu once a link is tapped
   menu?.addEventListener('click', (e) => e.target.closest('a') && setMenu(false));
 
   // Sections are loaded in by include.js, so wait for them before watching the scroll.

@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>News | Learning Together</title>
+  <meta name="description"
+    content="News from Learning Together: Designing Inclusive Human-AI Teams for Collective Decision-Making." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@500;600;700&display=swap"
+    rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="assets/js/tailwind-config.js"></script>
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/news.js" defer></script>
+</head>
+
+<body class="flex min-h-screen flex-col bg-white font-sans text-slate-800 antialiased">
+  <div id="site-header"></div>
+
+  <main class="flex-1">
+    <section class="mx-auto max-w-6xl px-4 py-12 sm:py-24 sm:px-6">
+      <h1 class="text-3xl font-medium uppercase tracking-[0.25em] text-slate-400 sm:text-4xl">News</h1>
+
+      <!-- Filled in from the list in assets/js/news.js -->
+      <ul id="news-list" class="mt-12 space-y-8"></ul>
+
+      <nav id="news-pagination" class="mt-16 flex items-center justify-center gap-1" aria-label="News pages"></nav>
+    </section>
+  </main>
+
+  <div id="site-footer"></div>
+</body>
+
+</html>
