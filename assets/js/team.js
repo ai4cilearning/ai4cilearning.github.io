@@ -1,20 +1,38 @@
-// The team. Add, remove or reorder people here and the cards update to match.
+// The team, in groups. Add, remove or reorder people here and the cards update to match.
+//   title: the small heading above a group. Leave it as '' for no heading.
+//   role: shown under the organisation. Leave it as '' to show nothing.
 //   photo: path to their picture, e.g. P + 'Jane_Doe.jpg' (P is the assets/images/team/ folder). Leave it as '' to show a grey placeholder.
-//   website / linkedin: optional. Any you fill in appear as small icons when you hover over the card.
+//   website / linkedin: optional. Any you fill in appear as small icons on the card.
 const P = 'assets/images/team/';
 const TEAM = [
-  { name: 'Dr Zheng Yuan', role: 'Academic project lead', org: 'The University of Sheffield', photo: P + 'Zheng_Yuan.jpeg', website: 'https://www.cl.cam.ac.uk/~zy249/', linkedin: 'https://linkedin.com/in/zheng-yuan-a0979738' },
-  { name: 'Dr Bei Peng', role: 'Project co-lead', org: 'The University of Sheffield', photo: P + 'Bei_Peng.png', website: 'https://beipeng.github.io/', linkedin: 'https://uk.linkedin.com/in/bei-peng-5b08b992' },
-  { name: 'Supatat Chanwuttinant', role: 'Research Assistant', org: 'The University of Sheffield', photo: P + 'Supatat_Chanwuttinant.jpg', website: '', linkedin: 'https://www.linkedin.com/in/supatat-chanwuttinant/' },
-  { name: 'Haoming Sun', role: 'Research Assistant', org: 'The University of Sheffield', photo: P + 'Haoming_Sun.jpeg', website: '', linkedin: 'https://uk.linkedin.com/in/haoming-sun-bb6a182ab' },
-  { name: 'Kai Qian', role: 'Research Assistant', org: 'The University of Sheffield', photo: P + 'Kai_Qian.jpeg', website: '', linkedin: 'https://www.linkedin.com/in/kai-qian/' },
-  { name: 'Dr Imogen Casebourne', role: 'Academic project partner', org: 'University of Cambridge', photo: P + 'Imogen_Casebourne.jpg', website: '', linkedin: 'https://uk.linkedin.com/in/imogen-c-6170111' },
-  { name: 'Dr Luning Sun', role: 'Academic project partner', org: 'University of Cambridge', photo: P + 'luning_sun.jpg', website: '', linkedin: 'https://www.linkedin.com/in/sunluning' },
-  { name: 'Nora Petrova', role: 'Non-Academic team member', org: 'Prolific', photo: P + 'Nora_Petrova.webp', website: '', linkedin: 'https://uk.linkedin.com/in/nora-petrova' },
-  { name: 'Dr John Burden', role: 'Non-Academic team member', org: 'Prolific', photo: P + 'John-Burden.jpg', website: 'https://johnburden.co.uk/', linkedin: 'https://uk.linkedin.com/in/john-burden-10966b358' },
-  { name: 'Chengyu Huang', role: 'Non-Academic project partner lead', org: 'NetMind.AI', photo: P + 'Chengyu_Huang.jpeg', website: '', linkedin: 'https://www.linkedin.com/in/chengyu-huang-39373671' },
-  { name: 'Xiangpeng Wan', role: 'Non-Academic team member', org: 'NetMind.AI', photo: P + 'xiangpeng_wan.jpeg', website: '', linkedin: 'https://uk.linkedin.com/in/xiangpeng-wan-a26305107' },
-  { name: 'Hongyi Gu', role: 'Non-Academic team member', org: 'NetMind.AI', photo: '', website: '', linkedin: '' },
+  {
+    title: '',
+    people: [
+      { name: 'Dr Zheng Yuan', role: 'Project lead', org: 'The University of Sheffield', photo: P + 'Zheng_Yuan.jpeg', website: 'https://www.cl.cam.ac.uk/~zy249/', linkedin: 'https://linkedin.com/in/zheng-yuan-a0979738' },
+      { name: 'Dr Bei Peng', role: 'Project co-lead', org: 'The University of Sheffield', photo: P + 'Bei_Peng.png', website: 'https://beipeng.github.io/', linkedin: 'https://uk.linkedin.com/in/bei-peng-5b08b992' },
+    ],
+  },
+  {
+    title: 'Project Partners',
+    people: [
+      { name: 'Professor Li Yuan', role: '', org: 'University of Cambridge', photo: P + 'Li_Yuan.png', website: '', linkedin: 'https://www.linkedin.com/in/li-yuan-39921661/' },
+      { name: 'Dr Imogen Casebourne', role: '', org: 'University of Cambridge', photo: P + 'Imogen_Casebourne.jpg', website: '', linkedin: 'https://uk.linkedin.com/in/imogen-c-6170111' },
+      { name: 'Dr Luning Sun', role: '', org: 'University of Cambridge', photo: P + 'luning_sun.jpg', website: '', linkedin: 'https://www.linkedin.com/in/sunluning' },
+      { name: 'Nora Petrova', role: '', org: 'Prolific', photo: P + 'Nora_Petrova.webp', website: '', linkedin: 'https://uk.linkedin.com/in/nora-petrova' },
+      { name: 'Dr John Burden', role: '', org: 'Prolific', photo: P + 'John-Burden.jpg', website: 'https://johnburden.co.uk/', linkedin: 'https://uk.linkedin.com/in/john-burden-10966b358' },
+      { name: 'Chengyu Huang', role: '', org: 'NetMind.AI', photo: P + 'Chengyu_Huang.jpeg', website: '', linkedin: 'https://www.linkedin.com/in/chengyu-huang-39373671' },
+      { name: 'Xiangpeng Wan', role: '', org: 'NetMind.AI', photo: P + 'xiangpeng_wan.jpeg', website: '', linkedin: 'https://uk.linkedin.com/in/xiangpeng-wan-a26305107' },
+      { name: 'Hongyi Gu', role: '', org: 'NetMind.AI', photo: '', website: '', linkedin: '' },
+    ],
+  },
+  {
+    title: 'Researchers',
+    people: [
+      { name: 'Supatat Chanwuttinant', role: '', org: 'The University of Sheffield', photo: P + 'Supatat_Chanwuttinant.jpg', website: '', linkedin: 'https://www.linkedin.com/in/supatat-chanwuttinant/' },
+      { name: 'Haoming Sun', role: '', org: 'The University of Sheffield', photo: P + 'Haoming_Sun.jpeg', website: '', linkedin: 'https://uk.linkedin.com/in/haoming-sun-bb6a182ab' },
+      { name: 'Kai Qian', role: '', org: 'The University of Sheffield', photo: P + 'Kai_Qian.jpeg', website: '', linkedin: 'https://www.linkedin.com/in/kai-qian/' },
+    ],
+  },
 ];
 
 const ICONS = {
@@ -34,38 +52,43 @@ function photoHtml(m) {
   </div>`;
 }
 
-// onPhoto: the desktop icons that sit over the photo. Otherwise the small icons under the role on phones and tablets.
+// onPhoto: the desktop icons that sit over the photo. Otherwise the small icons at the bottom of the card on phones and tablets.
 function linkHtml(href, kind, label, onPhoto) {
   if (!href) return '';
   const look = onPhoto
-    ? 'h-9 w-9 bg-white/90 text-slate-700 shadow-sm backdrop-blur hover:bg-white'
-    : 'h-8 w-8 bg-slate-100 text-slate-600 hover:bg-brand-50';
+    ? 'h-8 w-8 bg-white/90 text-slate-700 shadow-sm backdrop-blur hover:bg-white'
+    : 'h-7 w-7 bg-slate-100 text-slate-600 hover:bg-brand-50';
   return `<a href="${esc(href)}" target="_blank" rel="noopener" aria-label="${label}"
     class="grid place-items-center rounded-lg transition hover:text-brand-700 ${look}">${ICONS[kind]}</a>`;
 }
 
-function initTeam() {
-  const grid = document.getElementById('team-grid');
-  if (!grid) return;
-  grid.innerHTML = TEAM.map((m) => {
-    const links = (onPhoto) =>
-      linkHtml(m.website, 'website', `${m.name}’s website`, onPhoto) + linkHtml(m.linkedin, 'linkedin', `${m.name} on LinkedIn`, onPhoto);
-    const hasLinks = m.website || m.linkedin;
-    return `
-    <article class="group flex w-[calc((100%-1rem)/2)] flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white transition hover:-translate-y-1 hover:shadow-lg hover:shadow-slate-200/60
-                    md:w-[calc((100%-3rem)/3)] lg:w-[calc((100%-4.5rem)/4)]">
+function cardHtml(m) {
+  const links = (onPhoto) =>
+    linkHtml(m.website, 'website', `${m.name}’s website`, onPhoto) + linkHtml(m.linkedin, 'linkedin', `${m.name} on LinkedIn`, onPhoto);
+  const hasLinks = m.website || m.linkedin;
+  return `
+    <article class="group flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white transition hover:-translate-y-1 hover:shadow-lg hover:shadow-slate-200/60">
       <div class="relative aspect-square overflow-hidden">
         ${photoHtml(m)}
-        ${hasLinks ? `<div class="absolute inset-x-0 bottom-3 hidden translate-y-2 justify-center gap-2 opacity-0 transition group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100 lg:flex">${links(true)}</div>` : ''}
+        ${hasLinks ? `<div class="absolute inset-x-0 bottom-2 hidden translate-y-2 justify-center gap-1.5 opacity-0 transition group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:translate-y-0 group-focus-within:opacity-100 lg:flex">${links(true)}</div>` : ''}
       </div>
-      <div class="flex flex-1 flex-col p-4 sm:p-5">
-        <h3 class="font-display text-base font-semibold leading-snug sm:text-lg tracking-tight text-slate-950">${esc(m.name)}</h3>
-        <p class="mt-1.5 text-[0.8125rem] sm:text-sm text-slate-500">${esc(m.org)}</p>
-        <p class="text-[0.8125rem] sm:text-sm text-slate-400">${esc(m.role)}</p>
-        ${hasLinks ? `<div class="mt-auto flex gap-2 pt-4 lg:hidden">${links(false)}</div>` : ''}
+      <div class="flex flex-1 flex-col p-3 sm:p-4">
+        <h4 class="font-display text-sm font-semibold leading-snug tracking-tight text-slate-950 sm:text-base">${esc(m.name)}</h4>
+        <p class="mt-1 text-xs text-slate-500 sm:text-[0.8125rem]">${esc(m.org)}</p>
+        ${m.role ? `<p class="text-xs text-slate-400 sm:text-[0.8125rem]">${esc(m.role)}</p>` : ''}
+        ${hasLinks ? `<div class="mt-auto flex gap-1.5 pt-3 lg:hidden">${links(false)}</div>` : ''}
       </div>
     </article>`;
-  }).join('');
+}
+
+function initTeam() {
+  const wrap = document.getElementById('team-groups');
+  if (!wrap) return;
+  wrap.innerHTML = TEAM.map(({ title, people }) => `
+    <div>
+      ${title ? `<h3 class="mb-6 text-xl font-medium uppercase tracking-[0.2em] text-slate-400 sm:text-2xl">${esc(title)}</h3>` : ''}
+      <div class="grid max-[499px]:grid-cols-2 gap-3 grid-cols-3 md:grid-cols-4 md:gap-4 lg:grid-cols-5">${people.map(cardHtml).join('')}</div>
+    </div>`).join('');
 }
 
 (window.sectionsReady || Promise.resolve()).then(initTeam);
