@@ -86,8 +86,8 @@ function initTeam() {
   if (!wrap) return;
   wrap.innerHTML = TEAM.map(({ title, people }) => `
     <div>
-      ${title ? `<h3 class="mb-6 text-sm font-medium uppercase tracking-[0.2em] text-slate-500">${esc(title)}</h3>` : ''}
-      <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 md:gap-4 lg:grid-cols-5 xl:grid-cols-6">${people.map(cardHtml).join('')}</div>
+      ${title ? `<h3 class="mb-6 text-xl font-medium uppercase tracking-[0.2em] text-slate-400 sm:text-2xl">${esc(title)}</h3>` : ''}
+      <div class="grid max-[499px]:grid-cols-2 gap-3 grid-cols-3 md:grid-cols-4 md:gap-4 lg:grid-cols-5">${people.map(cardHtml).join('')}</div>
     </div>`).join('');
 }
 
